@@ -1,4 +1,4 @@
-# Portafolio · César Enrique Uc Aguilar
+# Portafolio · Cesar Enrique Uc Aguilar
 
 Portafolio hecho con React + Vite.
 
