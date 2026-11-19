@@ -1,0 +1,40 @@
+/* Estilos base y estética editorial oscura */
+body {
+  background-color: #0b0b0c;
+  color: #d4d4d8;
+}
+
+/* Tratamiento fotográfico en blanco y negro de alto contraste */
+.photo-raw {
+  filter: grayscale(100%) contrast(125%) brightness(82%);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.photo-box:hover .photo-raw {
+  filter: grayscale(25%) contrast(115%) brightness(92%);
+  transform: scale(1.02);
+}
+
+/* Textura sutil tipo papel impreso / fanzine */
+.paper-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
+  background-size: 3px 3px;
+}
+
+/* Personalización discreta de barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}

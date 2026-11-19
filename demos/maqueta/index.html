@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Practica Layouts - Cesar</title>
+  <!-- para cambiar de diseno cambiar aqui layout1.css por layoutX.css -->
+  <link rel="stylesheet" href="layoutX.css">
+</head>
+<body>
+
+  <div id="contenedor">
+
+    <div id="header">
+      <h1>Mi_Sitio</h1>
+    </div>
+
+    <div id="nav">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- este sidebar solo se ve en el layout 2, en el layout 1 se oculta con css -->
+    <div id="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Perfil</a></li>
+        <li><a href="#">Proyectos</a></li>
+        <li><a href="#">Config</a></li>
+      </ul>
+    </div>
+
+    <div id="main">
+
+      <div id="hero">
+        <h2>Bienvenido</h2>
+        <p>Este es un texto de prueba para la seccion principal de la pagina.</p>
+        <a href="#" id="boton">Comenzar</a>
+      </div>
+
+      <!-- le pregunte a la ia como hacer 3 cajas del mismo tamano en fila, dijo que con flexbox -->
+      <div id="cards">
+        <div class="card">
+          <h3>Servicio 1</h3>
+          <p>Texto de ejemplo del primer servicio.</p>
+        </div>
+        <div class="card">
+          <h3>Servicio 2</h3>
+          <p>Texto de ejemplo del segundo servicio.</p>
+        </div>
+        <div class="card">
+          <h3>Servicio 3</h3>
+          <p>Texto de ejemplo del tercer servicio.</p>
+        </div>
+      </div>
+
+      <div id="contenido">
+        <h2>Sobre Nosotros</h2>
+        <p>Aqui va un parrafo con mas informacion sobre el sitio o el proyecto.</p>
+      </div>
+
+    </div>
+
+    <div id="footer">
+      <p>Kenzo_cesar 2026</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

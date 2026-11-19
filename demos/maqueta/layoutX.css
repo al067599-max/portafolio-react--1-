@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+/* le pedi ayuda a la ia para que el header y el footer ocupen todo el ancho
+   pero el sidebar y el main queden uno al lado del otro, uso flex-wrap */
+#contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* con width 100% se asegura que ocupe toda la fila aunque el padre sea flex */
+#header {
+  background-color: #cfe0fb;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+/* aqui la nav de arriba no se usa, el sidebar hace su funcion */
+#nav {
+  display: none;
+}
+
+#sidebar {
+  background-color: #dbeafe;
+  width: 200px;
+  padding: 20px;
+}
+
+#sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar li {
+  margin-bottom: 8px;
+}
+
+#sidebar a {
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+#main {
+  flex: 1;
+  padding: 20px;
+}
+
+#hero {
+  background-color: #e8eefc;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+#boton {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+#cards {
+  margin-bottom: 20px;
+}
+
+.card {
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card:nth-child(1) {
+  background-color: #60a5fa;
+}
+
+.card:nth-child(2) {
+  background-color: #34d399;
+}
+
+.card:nth-child(3) {
+  background-color: #a78bfa;
+}
+
+#contenido {
+  background-color: #f9fafb;
+  padding: 20px;
+}
+
+#footer {
+  background-color: #fbcfe8;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+}
