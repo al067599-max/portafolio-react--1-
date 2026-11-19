@@ -1,0 +1,97 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+#contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+#header {
+  background-color: #cfe0fb;
+  padding: 20px;
+  text-align: center;
+}
+
+#nav {
+  background-color: #1e293b;
+}
+
+#nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+#nav li {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+#nav a {
+  color: white;
+  text-decoration: none;
+}
+
+/* pregunte como ocultar un elemento sin borrarlo del html, dijo display none */
+#sidebar {
+  display: none;
+}
+
+#hero {
+  background-color: #e8eefc;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+#boton {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+/* flex con gap para que las 3 tarjetas queden separadas parejo, tip de la ia */
+#cards {
+  display: flex;
+  gap: 15px;
+  padding: 30px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  color: white;
+  border-radius: 5px;
+}
+
+/* nth-child para no tener que poner una clase distinta a cada tarjeta */
+.card:nth-child(1) {
+  background-color: #60a5fa;
+}
+
+.card:nth-child(2) {
+  background-color: #34d399;
+}
+
+.card:nth-child(3) {
+  background-color: #a78bfa;
+}
+
+#contenido {
+  padding: 0 30px 40px;
+  text-align: center;
+}
+
+#footer {
+  background-color: #fbcfe8;
+  text-align: center;
+  padding: 15px;
+}

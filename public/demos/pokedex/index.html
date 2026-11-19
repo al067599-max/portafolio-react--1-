@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poké dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+
+    <style>
+        /* CSS propio (la entrega debe ser un solo archivo) */
+        td img { width: 96px; height: 96px; image-rendering: pixelated; }
+        td.nombre { text-transform: capitalize; font-weight: bold; }
+        td.descripcion { max-width: 320px; }
+        .mega { color: #b02a37; font-weight: bold; }
+        .evo { display: inline-block; text-align: center; margin: 0 4px; }
+        .evo img { width: 72px; height: 72px; }
+        .evo figcaption { text-transform: capitalize; font-size: 0.8rem; }
+        .cadena { display: flex; align-items: center; flex-wrap: wrap; }
+        .ramas { display: flex; flex-direction: column; }
+        .ramas > .cadena { margin-bottom: 4px; }
+        .flecha { font-size: 1.4rem; color: #888; }
+        .cargando { color: #888; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-4 offset-8 md:col-1 md:offset-11">
+                <button id="btn-agregar" class="button theme-primary btn-solid btn-styled">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    Agregar
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+                <table class="table table-striped table-hover mt-5">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Nombre</th>
+                            <th>Sprite</th>
+                            <th>Descripción</th>
+                            <th>Cadena evolutiva</th>
+                            <th>Megaevoluciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>Número</th>
+                            <th>Nombre</th>
+                            <th>Sprite</th>
+                            <th>Descripción</th>
+                            <th>Cadena evolutiva</th>
+                            <th>Megaevoluciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <dialog class="dialog" id="form-dialog">
+        <div class="dialog-header">
+            <h1 class="dialog-title">Formulario</h1>
+            <button type="button" data-bs-dismiss="dialog" aria-label="Cerrar" class="btn-close"></button>
+        </div>
+
+        <div class="dialog-body">
+            <div class="form-field">
+                <label for="inp-search" class="form-label">
+                    Buscar:
+                </label>
+                <input type="text" id="inp-search" class="form-control" placeholder="Buscar por nombre o número">
+            </div>
+        </div>
+
+        <div class="dialog-footer">
+            <button class="btn-solid theme-secondary" data-bs-dismiss="dialog">
+                Cancelar
+            </button>
+            <button class="btn-solid theme-primary" id="btn-buscar">
+                Buscar
+            </button>
+        </div>
+    </dialog>
+
+    <script>
+let bsDialog
+let historial = []   // aqui guardo los pokemones que se han buscado (tambien es mi cache)
+
+function init () {
+
+    bsDialog = new bootstrap.Dialog('#form-dialog')
+
+    document.querySelector('#btn-agregar')
+      .addEventListener('click', () => bsDialog.show())
+
+    document.querySelector('#btn-buscar')
+      .addEventListener('click', buscarPokemon)
+
+    // NUEVO: buscar tambien con la tecla ENTER
+    document.querySelector('#inp-search')
+      .addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') buscarPokemon()
+      })
+
+    // al abrir la pagina, cargo lo que ya estaba guardado
+    cargarHistorial()
+}
+
+function buscarPokemon () {
+    var nombre = document.querySelector('#inp-search').value.trim().toLowerCase()
+
+    if (nombre === '') return
+
+    // NUEVO: si ya esta en la cache (localStorage) no vuelvo a pedirlo a la API
+    var existente = historial.find(function (p) {
+        return p.name === nombre || String(p.id) === nombre
+    })
+    if (existente) {
+        document.querySelector('#inp-search').value = ''
+        bsDialog.hide()
+        return
+    }
+
+    fetch('https://pokeapi.co/api/v2/pokemon/' + nombre)
+        .then(function (respuesta) {
+            if (!respuesta.ok) throw new Error('No encontrado')   // NUEVO: revisar 404
+            return respuesta.json()
+        })
+        .then(function (pokemon) {
+            // me quedo solo con los datos que necesito
+            var datos = {
+                id: pokemon.id,
+                name: pokemon.name,
+                sprite: pokemon.sprites.front_default
+            }
+
+            historial.push(datos)
+            guardarHistorial()
+            pintarTabla()               // se muestra primero ID, nombre y sprite
+
+            document.querySelector('#inp-search').value = ''
+            bsDialog.hide()
+
+            completarDatos(datos)       // NUEVO: descripcion y cadena evolutiva
+        })
+        .catch(function (error) {
+            alert('No se pudo encontrar el pokemon')
+        })
+}
+
+// NUEVO: segunda y tercera request (species y evolution-chain)
+function completarDatos (datos) {
+    fetch('https://pokeapi.co/api/v2/pokemon-species/' + datos.id)
+        .then(function (r) { return r.json() })
+        .then(function (especie) {
+            // descripcion (flavor text) en español
+            var entrada = especie.flavor_text_entries.find(function (e) {
+                return e.language.name === 'es'
+            })
+            datos.descripcion = entrada
+                ? entrada.flavor_text.replace(/[\n\f]/g, ' ')
+                : 'Sin descripción en español.'
+
+            // megaevoluciones (variedades cuyo nombre contiene "-mega")
+            datos.megas = especie.varieties
+                .filter(function (v) { return v.pokemon.name.indexOf('-mega') !== -1 })
+                .map(function (v) {
+                    return { name: v.pokemon.name, id: idDeUrl(v.pokemon.url) }
+                })
+
+            return fetch(especie.evolution_chain.url)
+        })
+        .then(function (r) { return r.json() })
+        .then(function (cadena) {
+            datos.evolucion = armarCadena(cadena.chain)
+
+            guardarHistorial()
+            pintarTabla()
+        })
+        .catch(function (error) {
+            console.error(error)
+        })
+}
+
+// NUEVO: convierte la cadena evolutiva en un arbol {name, id, hijos} (maneja ramas, ej. Eevee)
+function armarCadena (nodo) {
+    return {
+        name: nodo.species.name,
+        id: idDeUrl(nodo.species.url),
+        hijos: nodo.evolves_to.map(armarCadena)
+    }
+}
+
+// el id es el ultimo numero de la URL (.../pokemon-species/25/)
+function idDeUrl (url) {
+    return url.split('/').filter(Boolean).pop()
+}
+
+// el sprite se arma con el id, asi no hacen falta mas requests
+function urlSprite (id) {
+    return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + id + '.png'
+}
+
+function tarjeta (p) {
+    return '<figure class="evo"><img src="' + urlSprite(p.id) + '" alt="' + p.name + '">' +
+        '<figcaption>' + p.name + '</figcaption></figure>'
+}
+
+function pintarCadena (nodo) {
+    var html = '<div class="cadena">' + tarjeta(nodo)
+
+    if (nodo.hijos.length === 1) {
+        html += '<span class="flecha">→</span>' + pintarCadena(nodo.hijos[0])
+    } else if (nodo.hijos.length > 1) {
+        html += '<span class="flecha">→</span><div class="ramas">' +
+            nodo.hijos.map(pintarCadena).join('') + '</div>'
+    }
+
+    return html + '</div>'
+}
+
+function pintarTabla () {
+    document.querySelector('table tbody').innerHTML = ''
+    historial.forEach(pintarFila)
+}
+
+function pintarFila (pokemon) {
+    var tabla = document.querySelector('table tbody')
+
+    var cargando = '<span class="cargando">Cargando...</span>'
+    var megas = 'Ninguna'
+    if (pokemon.megas && pokemon.megas.length > 0) {
+        megas = pokemon.megas.map(function (m) {
+            return '<span class="mega">' + tarjeta(m) + '</span>'
+        }).join('')
+    }
+
+    tabla.innerHTML += '<tr>' +
+        '<td>' + pokemon.id + '</td>' +
+        '<td class="nombre">' + pokemon.name + '</td>' +
+        '<td><img src="' + pokemon.sprite + '"></td>' +
+        '<td class="descripcion">' + (pokemon.descripcion || cargando) + '</td>' +
+        '<td>' + (pokemon.evolucion ? pintarCadena(pokemon.evolucion) : cargando) + '</td>' +
+        '<td>' + (pokemon.megas ? megas : cargando) + '</td>' +
+        '</tr>'
+}
+
+function guardarHistorial () {
+    // JSON.stringify convierte la lista a texto JSON
+    localStorage.setItem('pokemones', JSON.stringify(historial))
+}
+
+function cargarHistorial () {
+    var guardado = localStorage.getItem('pokemones')
+
+    if (guardado) {
+        // JSON.parse convierte el texto JSON otra vez a lista
+        historial = JSON.parse(guardado)
+
+        pintarTabla()
+
+        // NUEVO: si alguno se quedo sin completar (cerraron la pagina antes), lo termino
+        historial.forEach(function (p) {
+            var formatoViejo = typeof p.evolucion === 'string' ||
+                (p.megas && p.megas.length > 0 && typeof p.megas[0] === 'string')
+            if (formatoViejo) { p.evolucion = null; p.megas = null }
+
+            if (!p.descripcion || formatoViejo) completarDatos(p)
+        })
+    }
+}
+
+/** NO MODIFICAR */
+window.addEventListener('load', () => {
+    import('https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js')
+        .then(bootstrap => {
+            window.bootstrap = bootstrap
+
+            init()
+        })
+})
+    </script>
+</body>
+</html>

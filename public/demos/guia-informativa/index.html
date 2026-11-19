@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Cesar Enrique Uc Aguilar" />
+  <title>archivo.dsbm — Guía de Referencia | Cesar Enrique Uc Aguilar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            gothic: ['UnifrakturMaguntia', 'cursive'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="antialiased selection:bg-stone-200 selection:text-black">
+
+  <!-- Barra de navegación -->
+  <header class="sticky top-0 z-40 bg-[#0b0b0c]/95 border-b border-zinc-800 backdrop-blur-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between font-mono text-xs">
+      <a href="#top" class="text-zinc-100 font-semibold tracking-tight">
+        archivo.dsbm <span class="text-zinc-500">// ed.2026</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-5 text-zinc-400">
+        <a href="#contexto" class="hover:text-zinc-100">01_contexto</a>
+        <a href="#pilares" class="text-zinc-100 underline underline-offset-4 decoration-zinc-600">02_tres_pilares</a>
+        <a href="#directorio" class="hover:text-zinc-100">03_mas_bandas</a>
+        <a href="#curiosidades" class="hover:text-zinc-100">04_datos_curiosos</a>
+        <a href="#visual" class="hover:text-zinc-100">05_tipografia</a>
+        <a href="#sonido" class="hover:text-zinc-100">06_ingenieria</a>
+        <a href="#ruta" class="hover:text-zinc-100">07_ruta</a>
+      </nav>
+
+      <button id="menu-btn" class="lg:hidden border border-zinc-800 px-2.5 py-1 text-zinc-300">
+        indice
+      </button>
+    </div>
+
+    <div id="mobile-nav" class="hidden lg:hidden border-t border-zinc-800 bg-[#0b0b0c] px-4 py-3 space-y-2 font-mono text-xs text-zinc-400">
+      <a href="#contexto" class="block hover:text-white">01_contexto</a>
+      <a href="#pilares" class="block text-white">02_tres_pilares</a>
+      <a href="#directorio" class="block hover:text-white">03_mas_bandas</a>
+      <a href="#curiosidades" class="block hover:text-white">04_datos_curiosos</a>
+      <a href="#visual" class="block hover:text-white">05_tipografia</a>
+      <a href="#sonido" class="block hover:text-white">06_ingenieria</a>
+      <a href="#ruta" class="block hover:text-white">07_ruta</a>
+    </div>
+  </header>
+
+  <!-- Portada -->
+  <section id="top" class="border-b border-zinc-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-7">
+          <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-zinc-400 mb-4">
+            <span>GUÍA DE INICIACIÓN // DSBM</span>
+            <span class="text-zinc-700">|</span>
+            <span class="text-zinc-300">Por Cesar Enrique Uc Aguilar</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-6xl font-bold text-zinc-100 leading-[1.05] tracking-tight">
+            Depressive Suicidal Black Metal: sonido, estética y nueva ola.
+          </h1>
+
+          <p class="mt-6 text-zinc-400 text-base leading-relaxed max-w-xl">
+            Un archivo de consulta para entender cómo funciona esta rama introspectiva del metal extremo, desde sus raíces escandinavas de los años 90 hasta el sonido melódico actual liderado por <strong class="text-zinc-200 font-medium">Blade and Bath</strong>, <strong class="text-zinc-200 font-medium">Decalius</strong> y <strong class="text-zinc-200 font-medium">Sukkubys</strong>.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3 font-mono text-xs">
+            <a href="#pilares" class="px-4 py-2.5 bg-zinc-100 text-black font-medium hover:bg-zinc-300 transition">
+              explorar los 3 pilares →
+            </a>
+            <a href="#directorio" class="px-4 py-2.5 border border-zinc-700 text-zinc-300 hover:border-zinc-500 transition">
+              ver catálogo de bandas
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="border border-zinc-800 bg-zinc-950 p-3 photo-box">
+            <div class="relative aspect-[4/3] overflow-hidden bg-zinc-900">
+              <img 
+                src="img/hero.jpg" 
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80';"
+                alt="Equipo de grabación y guitarra DSBM" 
+                class="w-full h-full object-cover photo-raw"
+              />
+              <div class="absolute inset-0 paper-noise"></div>
+            </div>
+            <div class="mt-3 flex items-center justify-between font-mono text-[11px] text-zinc-500">
+              <span>fig.01 — grabación casera & atmósfera</span>
+              <span>compilado por C. E. Uc Aguilar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Datos rápidos -->
+      <div class="mt-14 pt-8 border-t border-zinc-800/80 grid grid-cols-2 sm:grid-cols-4 gap-6 font-mono text-xs">
+        <div>
+          <span class="text-zinc-500 block">ORIGEN</span>
+          <span class="text-zinc-200 mt-1 block">Noruega / Suecia (1993–96)</span>
+        </div>
+        <div>
+          <span class="text-zinc-500 block">FORMATO COMÚN</span>
+          <span class="text-zinc-200 mt-1 block">One-man bands (80%+)</span>
+        </div>
+        <div>
+          <span class="text-zinc-500 block">TEMPO HABITUAL</span>
+          <span class="text-zinc-200 mt-1 block">65 — 115 BPM</span>
+        </div>
+        <div>
+          <span class="text-zinc-500 block">VERTIENTE ACTUAL</span>
+          <span class="text-zinc-200 mt-1 block">Post-DSBM / Grunge-Black</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01. Contexto e Historia -->
+  <section id="contexto" class="border-b border-zinc-800 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-4">
+          <span class="font-mono text-xs text-zinc-500">01 / CONTEXTO</span>
+          <h2 class="font-serif text-3xl font-bold text-zinc-100 mt-1">De qué va el género</h2>
+          <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+            A diferencia del Black Metal tradicional centrado en lo oculto o antirreligioso, el DSBM lleva la distorsión hacia la introspección, la nostalgia y el aislamiento.
+          </p>
+          <p class="mt-3 text-sm text-zinc-400 leading-relaxed">
+            Musicalmente sustituye la agresión constante por progresiones menores hipnóticas, arpegios limpios con mucha reverberación y voces rasgadas que expresan vulnerabilidad.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8">
+          <div class="border border-zinc-800 divide-y divide-zinc-800 bg-zinc-950/60">
+            <div class="p-5 sm:p-6 grid sm:grid-cols-4 gap-2">
+              <div class="font-mono text-xs text-zinc-400">1993 — 1996</div>
+              <div class="sm:col-span-3">
+                <h3 class="text-sm font-semibold text-zinc-100">Proto-DSBM (Burzum, Strid, Bethlehem)</h3>
+                <p class="text-xs sm:text-sm text-zinc-400 mt-1">Surgen los riffs repetitivos, tiempos lentos y voces agonizantes que sentaron las bases fuera del black metal veloz.</p>
+              </div>
+            </div>
+            <div class="p-5 sm:p-6 grid sm:grid-cols-4 gap-2">
+              <div class="font-mono text-xs text-zinc-400">2000 — 2006</div>
+              <div class="sm:col-span-3">
+                <h3 class="text-sm font-semibold text-zinc-100">Consolidación subterránea (Xasthur, Leviathan, Silencer)</h3>
+                <p class="text-xs sm:text-sm text-zinc-400 mt-1">Proyectos solistas grabados en cinta o estudios caseros con estética lo-fi y muros de sonido densos.</p>
+              </div>
+            </div>
+            <div class="p-5 sm:p-6 grid sm:grid-cols-4 gap-2">
+              <div class="font-mono text-xs text-zinc-400">2007 — 2015</div>
+              <div class="sm:col-span-3">
+                <h3 class="text-sm font-semibold text-zinc-100">Giro melódico europeo (Lifelover, Psychonaut 4, Apati)</h3>
+                <p class="text-xs sm:text-sm text-zinc-400 mt-1">Se incorporan estructuras de post-punk, rock depresivo, bajos protagonistas y melodías urbanas.</p>
+              </div>
+            </div>
+            <div class="p-5 sm:p-6 grid sm:grid-cols-4 gap-2 bg-zinc-900/40">
+              <div class="font-mono text-xs text-zinc-200">2018 — HOY</div>
+              <div class="sm:col-span-3">
+                <h3 class="text-sm font-semibold text-zinc-100">Nueva ola digital (Blade and Bath, Decalius, Sukkubys)</h3>
+                <p class="text-xs sm:text-sm text-zinc-400 mt-1">Cruce directo con grunge, shoegaze y slowcore; guitarras limpias cristalinas que atrajeron a una nueva generación de oyentes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Los Tres Pilares Modernos -->
+  <section id="pilares" class="border-b border-zinc-800 py-16 bg-zinc-950/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="mb-10">
+        <span class="font-mono text-xs text-zinc-500">02 / ENFOQUE PRINCIPAL</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-zinc-100 mt-1">Los tres pilares contemporáneos</h2>
+        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
+          Estos tres proyectos definen el sonido actual del género. Selecciona cada ficha para revisar su identidad gráfica, integrantes, firma de guitarra y álbumes esenciales.
+        </p>
+      </div>
+
+      <!-- Tarjetas selectoras con foto de cada banda -->
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <button onclick="setBand('blade')" id="tab-blade" class="photo-box text-left border border-zinc-300 bg-zinc-900/80 p-4 transition cursor-pointer">
+          <div class="relative h-40 mb-3 overflow-hidden bg-black border border-zinc-800" id="card-art-blade"></div>
+          <div class="flex items-center justify-between">
+            <span class="font-gothic text-2xl text-zinc-100">Blade and Bath</span>
+            <span class="font-mono text-[10px] text-zinc-400">UCRANIA</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">Arpegios limpios, atmósfera invernal y melodía cinematográfica.</p>
+        </button>
+
+        <button onclick="setBand('decalius')" id="tab-decalius" class="photo-box text-left border border-zinc-800 bg-zinc-950 hover:border-zinc-600 p-4 transition cursor-pointer">
+          <div class="relative h-40 mb-3 overflow-hidden bg-black border border-zinc-800" id="card-art-decalius"></div>
+          <div class="flex items-center justify-between">
+            <span class="font-serif text-2xl font-bold tracking-widest uppercase text-zinc-100">DECALIUS</span>
+            <span class="font-mono text-[10px] text-zinc-400">BRASIL</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">Cruce con grunge de los 90, solos melódicos y voz desgarrada.</p>
+        </button>
+
+        <button onclick="setBand('sukkubys')" id="tab-sukkubys" class="photo-box text-left border border-zinc-800 bg-zinc-950 hover:border-zinc-600 p-4 transition cursor-pointer">
+          <div class="relative h-40 mb-3 overflow-hidden bg-black border border-zinc-800" id="card-art-sukkubys"></div>
+          <div class="flex items-center justify-between">
+            <span class="font-gothic text-2xl text-zinc-100">Sukkubys</span>
+            <span class="font-mono text-[10px] text-zinc-400">INTERNACIONAL</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">Reverb profundo, muros de sonido difusos e inmersión nocturna.</p>
+        </button>
+      </div>
+
+      <!-- Ficha técnica detallada -->
+      <div id="band-panel" class="border border-zinc-800 bg-[#0b0b0c]"></div>
+
+      <!-- Tabla comparativa -->
+      <div class="mt-10 border border-zinc-800 overflow-x-auto">
+        <table class="w-full text-left border-collapse font-mono text-xs">
+          <thead>
+            <tr class="border-b border-zinc-800 bg-zinc-950 text-zinc-400">
+              <th class="py-3 px-4">PROYECTO</th>
+              <th class="py-3 px-4">PAÍS / FORMATO</th>
+              <th class="py-3 px-4">FIRMA DE GUITARRA</th>
+              <th class="py-3 px-4">ESTILO VOCAL</th>
+              <th class="py-3 px-4">DISCO CLAVE</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-800/80 text-zinc-300">
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-white">Blade and Bath</td>
+              <td class="py-3.5 px-4">Ucrania (Solista)</td>
+              <td class="py-3.5 px-4">Arpegios + trémolo atmosférico</td>
+              <td class="py-3.5 px-4">Shriek agudo con eco largo</td>
+              <td class="py-3.5 px-4 text-zinc-400">Euphoria of Self-Destruction</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-white">Decalius</td>
+              <td class="py-3.5 px-4">Brasil (Solista)</td>
+              <td class="py-3.5 px-4">Acordes grunge + solos tristes</td>
+              <td class="py-3.5 px-4">Cruda, directa al frente</td>
+              <td class="py-3.5 px-4 text-zinc-400">Dehumanizing Loneliness</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold text-white">Sukkubys</td>
+              <td class="py-3.5 px-4">Escena Underground</td>
+              <td class="py-3.5 px-4">Capas difusas y acordes lentos</td>
+              <td class="py-3.5 px-4">Lamentos sumergidos en reverb</td>
+              <td class="py-3.5 px-4 text-zinc-400">Eternal Solitude</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. Directorio Ampliado de Bandas -->
+  <section id="directorio" class="border-b border-zinc-800 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="font-mono text-xs text-zinc-500">03 / CATÁLOGO AMPLIADO</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-zinc-100 mt-1">Más bandas fundamentales</h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2 font-mono text-xs" id="band-filters">
+          <button onclick="filterDirectory('all')" class="filter-btn px-3 py-1.5 bg-zinc-100 text-black font-medium cursor-pointer" data-filter="all">todas (9)</button>
+          <button onclick="filterDirectory('nueva-ola')" class="filter-btn px-3 py-1.5 border border-zinc-800 text-zinc-400 hover:text-white cursor-pointer" data-filter="nueva-ola">nueva ola</button>
+          <button onclick="filterDirectory('post-dsbm')" class="filter-btn px-3 py-1.5 border border-zinc-800 text-zinc-400 hover:text-white cursor-pointer" data-filter="post-dsbm">post-dsbm</button>
+          <button onclick="filterDirectory('clasico')" class="filter-btn px-3 py-1.5 border border-zinc-800 text-zinc-400 hover:text-white cursor-pointer" data-filter="clasico">clásicas</button>
+        </div>
+      </div>
+
+      <div id="directory-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- 04. Datos Curiosos del Género -->
+  <section id="curiosidades" class="border-b border-zinc-800 py-16 bg-zinc-950/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="mb-10">
+        <span class="font-mono text-xs text-zinc-500">04 / ARCHIVO CURIOSO</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-zinc-100 mt-1">Datos curiosos de la escena</h2>
+        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
+          Detalles poco conocidos sobre la grabación, los nombres, la psicología y la historia detrás de estas bandas.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 01</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">El efecto catártico comprobado</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            Investigaciones en psicología musical (como los estudios de la Universidad de Queensland) confirman que escuchar música extrema y melancólica no aumenta la tristeza, sino que ayuda a procesar emociones complejas y produce calma.
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 02</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">Decalius y el factor Nirvana / Alice in Chains</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            A diferencia de los puristas del Black Metal que solo escuchan metal extremo, el creador de Decalius ha citado abiertamente el grunge de los 90 y el rock alternativo como pilares de sus progresiones de acordes y solos.
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 03</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">Nunca tocan en vivo (casi siempre)</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            Proyectos como Xasthur, Blade and Bath o Decalius son estudios de una sola persona. Muchos jamás han dado un concierto porque sus canciones están diseñadas para escucharse en soledad con auriculares.
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 04</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">El piano clásico es un instrumento clave</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            Bandas como Thy Light (Brasil) y Nocturnal Depression (Francia) incorporan piezas de piano minimalista y violonchelo en medio de guitarras distorsionadas, inspiradas en compositores románticos como Chopin.
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 05</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">Focos activos fuera de Europa</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            Aunque el género nació en Escandinavia, hoy sus escenas más activas están en Latinoamérica (Brasil, México, Chile), Europa del Este (Ucrania, Rusia) y Georgia (Psychonaut 4).
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 bg-[#0b0b0c] p-5">
+          <span class="font-mono text-xs text-zinc-500">DATO // 06</span>
+          <h3 class="font-semibold text-zinc-100 mt-2">Amplificadores baratos como firma de sonido</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
+            En los inicios del género, varios músicos evitaban amplificadores caros de tubos y grababan directamente con pedales de distorsión conectados a grabadoras de cassette para lograr un tono frío y cortante.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. Tipografía y Arte Visual -->
+  <section id="visual" class="border-b border-zinc-800 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="mb-10">
+        <span class="font-mono text-xs text-zinc-500">05 / IDENTIDAD GRÁFICA</span>
+        <h2 class="font-serif text-3xl font-bold text-zinc-100 mt-1">Tipografía, logos y portadas</h2>
+        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
+          El DSBM moderno dejó atrás los logos ilegibles tipo "ramas de árbol" del Death Metal para adoptar caligrafía gótica clásica, tipografía serif espaciada y fotografía analógica en blanco y negro.
+        </p>
+      </div>
+
+      <div class="border border-zinc-800 bg-zinc-950 p-5 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-800">
+          <div class="font-mono text-xs text-zinc-400">
+            PROBADOR TIPOGRÁFICO // ESCRIBE UN NOMBRE PARA VER LOS ESTILOS:
+          </div>
+          <input 
+            type="text" 
+            value="Blade and Bath" 
+            maxlength="24"
+            oninput="updateFonts(this.value)"
+            class="bg-[#0b0b0c] border border-zinc-700 px-3 py-1.5 font-mono text-xs text-zinc-100 focus:outline-none focus:border-zinc-400 w-full sm:w-64"
+          />
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+          <div class="border border-zinc-800/90 p-4 bg-[#0b0b0c]">
+            <span class="font-mono text-[10px] text-zinc-500 block">01. BLACKLETTER</span>
+            <div id="f-1" class="font-gothic text-3xl text-zinc-100 my-5 text-center break-words">Blade and Bath</div>
+            <p class="text-[11px] text-zinc-500">Estilo Sukkubys / Clásico europeo.</p>
+          </div>
+          <div class="border border-zinc-800/90 p-4 bg-[#0b0b0c]">
+            <span class="font-mono text-[10px] text-zinc-500 block">02. SERIF ESPACIADA</span>
+            <div id="f-2" class="font-serif text-xl tracking-[0.25em] uppercase text-zinc-100 my-6 text-center break-words">Blade and Bath</div>
+            <p class="text-[11px] text-zinc-500">Estilo Decalius / Post-DSBM.</p>
+          </div>
+          <div class="border border-zinc-800/90 p-4 bg-[#0b0b0c]">
+            <span class="font-mono text-[10px] text-zinc-500 block">03. EDITORIAL ITÁLICA</span>
+            <div id="f-3" class="font-serif italic text-2xl text-zinc-100 my-5 text-center break-words">Blade and Bath</div>
+            <p class="text-[11px] text-zinc-500">Estética poética y minimalista.</p>
+          </div>
+          <div class="border border-zinc-800/90 p-4 bg-[#0b0b0c]">
+            <span class="font-mono text-[10px] text-zinc-500 block">04. DEMO CASSETTE</span>
+            <div id="f-4" class="font-mono text-sm tracking-widest lowercase text-zinc-300 my-6 text-center break-words">blade and bath</div>
+            <p class="text-[11px] text-zinc-500">Grabaciones caseras lo-fi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. Anatomía Sonora -->
+  <section id="sonido" class="border-b border-zinc-800 py-16 bg-zinc-950/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="mb-10">
+        <span class="font-mono text-xs text-zinc-500">06 / COMPOSICIÓN E INGENIERÍA</span>
+        <h2 class="font-serif text-3xl font-bold text-zinc-100 mt-1">Cómo se construye una canción</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 font-sans">
+        <div class="border border-zinc-800 p-6 bg-[#0b0b0c]">
+          <div class="font-mono text-xs text-zinc-500 mb-2">01. GUITARRAS Y AFINACIÓN</div>
+          <h3 class="text-lg font-semibold text-zinc-100">Limpio con Chorus vs. Trémolo</h3>
+          <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+            Se mantiene afinación estándar (E Standard) o Drop D para conservar la claridad en las cuerdas agudas. La canción suele alternar arpegios limpios con mucha reverberación y muros de distorsión aguda.
+          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-800/80 font-mono text-xs text-zinc-400">
+            Cadena de efectos: Overdrive → Chorus → Delay → Hall Reverb
+          </div>
+        </div>
+
+        <div class="border border-zinc-800 p-6 bg-[#0b0b0c]">
+          <div class="font-mono text-xs text-zinc-500 mb-2">02. TÉCNICA VOCAL</div>
+          <h3 class="text-lg font-semibold text-zinc-100">Shrieks agudos y spoken word</h3>
+          <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+            Se prioriza la carga emocional sobre la perfección técnica. Predominan los gritos agudos rasgados (false cord / fry) y pasajes susurrados mezclados con eco profundo.
+          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-800/80 font-mono text-xs text-zinc-400">
+            Referencia: Decalius en "Hated by Life Itself"
+          </div>
+        </div>
+
+        <div class="border border-zinc-800 p-6 bg-[#0b0b0c]">
+          <div class="font-mono text-xs text-zinc-500 mb-2">03. PERCUSIÓN Y BAJO</div>
+          <h3 class="text-lg font-semibold text-zinc-100">Ritmo pausado (65–115 BPM)</h3>
+          <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+            La batería evita el virtuosismo. Usa patrones constantes de platillos abiertos (Ride o Crash) y bombos lentos para no romper el estado hipnótico de las guitarras.
+          </p>
+        </div>
+
+        <div class="border border-zinc-800 p-6 bg-[#0b0b0c]">
+          <div class="font-mono text-xs text-zinc-500 mb-2">04. PRODUCCIÓN</div>
+          <h3 class="text-lg font-semibold text-zinc-100">Mezcla orgánica y sin sobreproducción</h3>
+          <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+            La grabación casera (bedroom recording) es parte esencial de su identidad: conserva el aire de la habitación y una calidez analógica que conecta directo con el oyente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. Ruta de escucha -->
+  <section id="ruta" class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="mb-10">
+        <span class="font-mono text-xs text-zinc-500">07 / GUÍA DE INICIACIÓN</span>
+        <h2 class="font-serif text-3xl font-bold text-zinc-100 mt-1">Por dónde empezar a escuchar</h2>
+        <p class="text-sm text-zinc-400 mt-2">
+          Tres etapas recomendadas para alguien que nunca ha escuchado el género.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="border border-zinc-800 p-5 bg-zinc-950/60">
+          <span class="font-mono text-xs text-zinc-200 border border-zinc-700 px-2 py-0.5">NIVEL 01 // ACCESIBLE</span>
+          <h3 class="font-serif text-2xl font-bold text-zinc-100 mt-4">La nueva ola melódica</h3>
+          <p class="text-xs text-zinc-400 mt-2 mb-5">Melodías claras de guitarra y estructuras cercanas al rock alternativo.</p>
+          <ul class="space-y-3 font-mono text-xs border-t border-zinc-800 pt-4">
+            <li><span class="text-zinc-100">Decalius</span> — Dehumanizing Loneliness</li>
+            <li><span class="text-zinc-100">Blade and Bath</span> — Euphoria of Self-Destruction</li>
+            <li><span class="text-zinc-100">Sukkubys</span> — Eternal Solitude</li>
+          </ul>
+        </div>
+
+        <div class="border border-zinc-800 p-5 bg-zinc-950/60">
+          <span class="font-mono text-xs text-zinc-400 border border-zinc-800 px-2 py-0.5">NIVEL 02 // POST-DSBM</span>
+          <h3 class="font-serif text-2xl font-bold text-zinc-100 mt-4">Escuela europea urbana</h3>
+          <p class="text-xs text-zinc-400 mt-2 mb-5">Mezcla de post-punk, dinámicas intensas y melancolía nocturna.</p>
+          <ul class="space-y-3 font-mono text-xs border-t border-zinc-800 pt-4">
+            <li><span class="text-zinc-100">Lifelover</span> — Pulver (2006)</li>
+            <li><span class="text-zinc-100">Psychonaut 4</span> — Dipsomania (2015)</li>
+            <li><span class="text-zinc-100">Apati</span> — Eufori (2009)</li>
+          </ul>
+        </div>
+
+        <div class="border border-zinc-800 p-5 bg-zinc-950/60">
+          <span class="font-mono text-xs text-zinc-400 border border-zinc-800 px-2 py-0.5">NIVEL 03 // CLÁSICO</span>
+          <h3 class="font-serif text-2xl font-bold text-zinc-100 mt-4">Núcleo atmosférico</h3>
+          <p class="text-xs text-zinc-400 mt-2 mb-5">Temas largos, producción cruda y muros de sonido ambientales.</p>
+          <ul class="space-y-3 font-mono text-xs border-t border-zinc-800 pt-4">
+            <li><span class="text-zinc-100">Xasthur</span> — Telepathic with the Deceased</li>
+            <li><span class="text-zinc-100">Austere</span> — To Lay Like Old Ashes</li>
+            <li><span class="text-zinc-100">Thy Light</span> — Suici.De.pression</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 py-8 font-mono text-xs text-zinc-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+      <div>
+        <span class="text-zinc-300 font-medium">Cesar Enrique Uc Aguilar</span> — Guía Informativa de DSBM (2026)
+      </div>
+      <div>
+        Blade and Bath • Decalius • Sukkubys
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
