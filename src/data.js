@@ -5,7 +5,7 @@ export const profile = {
   city: 'Campeche, México',
   about:
     'Este portafolio reúne lo que construí en Diseño Web este semestre: de maquetar con HTML y CSS puros a consumir APIs con JavaScript y armar interfaces con Tailwind y React. Cada trabajo tiene una demo que puedes abrir.',
-  github: '', // ej. https://github.com/tu-usuario
+    github: 'https://github.com/al067599-max',
 }
 
 export const areas = ['Todos', 'HTML y CSS', 'JavaScript', 'APIs y AJAX', 'Frameworks']
