@@ -12,3 +12,6 @@ Las demos de los trabajos están en `public/demos/`. Edita `src/data.js`: tus en
 ## Publicar
 **Vercel:** sube el repo a GitHub, entra a vercel.com, "Add New Project", elige el repo y despliega (detecta Vite solo).
 **GitHub Pages:** `npm run deploy` y activa Pages en Settings > Pages con la rama `gh-pages`.
+
+## Pronts
+Te paso mis textos de src/data.js (lo de los dos layouts, la red social en equipo, el juego, la Pokédex con caché en localStorage y la guía con Tailwind). Acomódales la redacción para que se lean bien, pero sin sonar formal ni cambiar lo que hice
